@@ -1,5 +1,18 @@
 # Object file
 *.o
+target
 
 # Ada Library Information
 *.ali
+
+# Ada temporaty files
+.#*
+*.npp
+
+# Mac OS X informations
+.DS_Store
+
+# VIM informations
+
+.backups
+*.swp
