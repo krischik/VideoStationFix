@@ -9,7 +9,7 @@ project VideoStationFix is
    end Ide;
 
    package Pretty_Printer is
-      for Default_Switches ("ada") use ("-M120", "-W8");
+      for Default_Switches ("ada") use ("-W8", "-cl3", "-A0", "-A4", "-M96");
    end Pretty_Printer;
 
    for Main use ("Fix_TV_Show.adb");
@@ -20,7 +20,7 @@ project VideoStationFix is
    end Naming;
 
    package Compiler is
-      for Default_Switches ("ada") use ("-gnatVa", "-gnatw.e", "-gnat12", "-gnatyaABefhiIkl");
+      for Default_Switches ("ada") use ("-gnatVa", "-gnatw.e", "-gnat12", "-gnatyaABefhiklOM96");
    end Compiler;
 
 end VideoStationFix;
