@@ -15,24 +15,42 @@
 
 pragma Assertion_Policy (Check);
 
-with Ada.Text_IO;
-with Ada.Command_Line;
+--  @summary
+--  Reading iTunes informations
+--
+--  @description
+--  This package provides routines reading informations form iTunes organised movies
+--
+package ITunes is
 
-with ITunes;
+   --  A season number. Video station seem to have only one byte reserved. Note that 0 is usualy
+   --  considered “no sesason”
+   --
+   type Season_Number is range 0 .. 255;
 
-procedure Fix_TV_Show is
+   --  A episode number. Video station seem to have only one byte reserved. Note that 0 is
+   --  usualy considered “no sesason”
+   --
+   type Episode_Number is range 0 .. 255;
 
-begin
-   for I in 1 .. Ada.Command_Line.Argument_Count loop
-      declare
-         File_Name : constant String     := Ada.Command_Line.Argument (I);
-         Episode   : ITunes.Episode_Info := ITunes.Get_Episode_Info (File_Name);
-      begin
+   -- Episode of a TV-Show
+   --
+   -- @field Season of the TV-Show
+   -- @field Episode of the TV-Show
+   type Episode_Info is record
+      Season  : Season_Number;
+      Episode : Episode_Number;
+   end record;
 
-         Ada.Text_IO.New_Line;
-      end;
-   end loop;
-end Fix_TV_Show;
+   --  extract season and episode info from iTunes style filename
+   --
+   function Get_Episode_Info (File_Name : in String) return Episode_Info with
+      Pre => File_Name'Length >= 5;
+
+private
+      --  pragma Pure_Function (Get_Episode_Info);
+
+end ITunes;
 
 --  vim: set nowrap tabstop=8 shiftwidth=3 softtabstop=3 expandtab : vim: set textwidth=0
 --  filetype=ada foldmethod=expr nospell :
